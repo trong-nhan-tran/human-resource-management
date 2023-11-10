@@ -3,3 +3,24 @@ body {
     margin: 0;
 }
 
+.d-flex{
+    display: flex;
+}
+
+.main-search-box{
+    height: 46px;
+    width: 400px;
+}
+
+
+.h-46{
+    height: 46px !important;
+}
+
+.mr-20{
+    margin-right: 20px;
+}
+
+.mb-20{
+    margin-bottom: 20px;
+}

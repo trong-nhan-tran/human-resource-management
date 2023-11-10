@@ -106,16 +106,9 @@
 
 
     <?php
-            include("../config/config.php");
-            $sql = "CALL HienThiLichDay()";
-
-            // Kết nối chuỗi sql vào CSDL
-            $result = mysqli_query($connect, $sql);
-
-            // Kiểm tra kết quả
-            if (!$result) {
-                die("Query failed: " . mysqli_error($connect));
-        }
+    include("../config/config.php");
+    $sql = "SELECT * FROM `lich_giang_day`";
+    $query_lichgd = mysqli_query($connect, $sql);
     ?>
     <div>
         <h1>Lịch Giảng Dạy</h1>
@@ -138,12 +131,10 @@
                     <th>STT</th>
                     <th>Mã Lịch Giảng Dạy</th>
                     <th>Ngày Dạy</th>
-                    <th>Tên Giáo Viên</th>
-                    <th>Môn Học</th>
-                    <th>Lớp</th>
-                    <th>Tiết Học</th>
-                    <th>Giờ Bắt Đầu</th>
-                    <th>Giờ Kết Thúc</th>
+                    <th>Mã Giáo Viên</th>
+                    <th>Mã Môn Học</th>
+                    <th>Mã Lớp</th>
+                    <th>Mã Tiết Học</th>
                 </tr>
 
             </thead>
@@ -151,19 +142,17 @@
             <tbody>
                 <?php
                 $i = 0;
-                while ($row = mysqli_fetch_array($result)) {
+                while ($row = mysqli_fetch_array($query_lichgd)) {
                     $i++;
                 ?>
                     <tr class="">
                         <td><?php echo $i ?></td>
                         <td><?php echo $row['MALGD'] ?></td>
                         <td><?php echo $row['NGAYDAY'] ?></td>
-                        <td><?php echo $row['TENGV'] ?></td>
-                        <td><?php echo $row['TENMONHOC'] ?></td>
-                        <td><?php echo $row['TENLOP'] ?></td>
-                        <td><?php echo $row['TENTIETHOC'] ?></td>
-                        <td><?php echo $row['GIOBATDAU'] ?></td>
-                        <td><?php echo $row['GIOKETTHUC'] ?></td>
+                        <td><?php echo $row['MAGV'] ?></td>
+                        <td><?php echo $row['MAMONHOC'] ?></td>
+                        <td><?php echo $row['MALOP'] ?></td>
+                        <td><?php echo $row['MATIETHOC'] ?></td>
                         <td>
                             <a class="btn btn-warning" href="./xoa.php?malgd=<?php echo $row['MALGD'] ?>">Xóa</a>
                             <a class="btn btn-danger" href="./capnhatlichday.php?malgd=<?php echo $row['MALGD'] ?>">Sửa</a>

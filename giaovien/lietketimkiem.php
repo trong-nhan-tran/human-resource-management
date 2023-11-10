@@ -3,8 +3,98 @@
 <body>
     <?php include("../components/navbar.php") ?>
     <div class="">
+        <?php
+            include("../config/config.php");
+
+            // Chuỗi tìm kiếm
+            $search = $_GET['search'];
+
+            // Tạo chuỗi sql chứa lệnh gọi stored procedure
+            $sql = "CALL TimGiaoVien('$search')";
+
+            // Kết nối chuỗi sql vào CSDL
+            $result = mysqli_query($connect, $sql);
+
+            // Kiểm tra kết quả
+            if (!$result) {
+                die("Query failed: " . mysqli_error($connect));
+        }
+        ?>
         <div>
-            <!-- Trigger the modal with a button -->
+
+            <div>
+                <h1>Danh Sách Giáo Viên</h1>
+                <div class="d-flex mb-20">
+                    <form class="main-search-box mr-20" action="./lietketimkiem.php">
+                        <div class="input-group">
+                            <input type="text" class="form-control h-46" placeholder="Search" name="search">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default h-46" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal-them-gv">Thêm Giáo Viên</button>
+
+                </div>
+                <h2>Kết quả kiểm kiểm cho "<?php echo $search ?>"</h2>
+
+                <table class="table table-bordered mt-24">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã Giáo Viên</th>
+                            <th>Tên Giáo Viên</th>
+                            <th>Chức Vụ</th>
+                            <th>Ngày Sinh</th>
+                            <th>Giới Tính</th>
+                            <th>Địa Chỉ</th>
+                            <th>Số Điện Thoại</th>
+                            <th>CCCD</th>
+                            <th>Email</th>
+                            <th>Bộ Môn</th>
+                            <th>Học Vấn</th>
+                            <th>Giáo Viên Hạng</th>
+                            <th>Bậc</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $i = 0;
+                        while ($row = mysqli_fetch_array($result)) {
+                            $i++;
+                        ?>
+                            <tr>
+                                <td><?php echo $i ?></td>
+                                <td><?php echo $row['MAGV'] ?></td>
+                                <td><?php echo $row['TENGV'] ?></td>
+                                <td><?php echo $row['TENCV'] ?></td>
+                                <td><?php echo $row['NGAYSINHGV'] ?></td>
+                                <td><?php echo $row['GIOITINHGV'] == 0 ? 'Nam' : 'Nữ'; ?></td>
+                                <td><?php echo $row['DIACHIGV'] ?></td>
+                                <td><?php echo $row['SDTGV'] ?></td>
+                                <td><?php echo $row['CCCDGV'] ?></td>
+                                <td><?php echo $row['EMAILGV'] ?></td>
+                                <td><?php echo $row['TENMONHOC'] ?></td>
+                                <td><?php echo $row['TRINHDO'] ?></td>
+                                <td><?php echo $row['TENHANGGV'] ?></td>
+                                <td><?php echo $row['TENBAC'] ?></td>
+                                <td>
+                                    <a class="btn btn-warning" href="./xoa.php?magiaovien=<?php echo $row['MAGV'] ?>">Xóa</a>
+                                    <a class="btn btn-danger" href="./capnhatgiaovien.php?magiaovien=<?php echo $row['MAGV'] ?>">Sửa</a>
+                                </td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+
             <!-- Modal Them GV -->
             <div class="modal fade" id="modal-them-gv" role="dialog">
                 <div class="modal-dialog">
@@ -171,89 +261,6 @@
                     </div>
 
                 </div>
-            </div>
-            <div>
-                <h1>Danh Sách Giáo Viên</h1>
-                <div class="d-flex mb-20">
-                    <form class="main-search-box mr-20" action="./lietketimkiem.php">
-                        <div class="input-group">
-                            <input type="text" class="form-control h-46" placeholder="Search" name="search">
-                            <div class="input-group-btn">
-                                <button class="btn btn-default h-46" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                            </div>
-                        </div>
-                    </form>
-
-                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal-them-gv">Thêm Giáo Viên</button>
-
-                </div>
-
-                
-                <?php
-                        include("../config/config.php");
-                        $sql = "CALL HienThiGiaoVien()";
-
-                        // Kết nối chuỗi sql vào CSDL
-                        $result = mysqli_query($connect, $sql);
-
-                        // Kiểm tra kết quả
-                        if (!$result) {
-                            die("Query failed: " . mysqli_error($connect));
-                    }
-                ?>
-                <table class="table table-bordered mt-24">
-                    <thead>
-                        <tr>
-                            <th>STT</th>
-                            <th>Mã Giáo Viên</th>
-                            <th>Tên Giáo Viên</th>
-                            <th>Chức Vụ</th>
-                            <th>Ngày Sinh</th>
-                            <th>Giới Tính</th>
-                            <th>Địa Chỉ</th>
-                            <th>Số Điện Thoại</th>
-                            <th>CCCD</th>
-                            <th>Email</th>
-                            <th>Bộ Môn</th>
-                            <th>Học Vấn</th>
-                            <th>Giáo Viên Hạng</th>
-                            <th>Bậc</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $i = 0;
-                        while ($row = mysqli_fetch_array($result)) {
-                            $i++;
-                        ?>
-                            <tr>
-                                <td><?php echo $i ?></td>
-                                <td><?php echo $row['MAGV'] ?></td>
-                                <td><?php echo $row['TENGV'] ?></td>
-                                <td><?php echo $row['TENCV'] ?></td>
-                                <td><?php echo $row['NGAYSINHGV'] ?></td>
-                                <td><?php echo $row['GIOITINHGV'] == 0 ? 'Nam' : 'Nữ'; ?></td>
-                                <td><?php echo $row['DIACHIGV'] ?></td>
-                                <td><?php echo $row['SDTGV'] ?></td>
-                                <td><?php echo $row['CCCDGV'] ?></td>
-                                <td><?php echo $row['EMAILGV'] ?></td>
-                                <td><?php echo $row['TENMONHOC'] ?></td>
-                                <td><?php echo $row['TRINHDO'] ?></td>
-                                <td><?php echo $row['TENHANGGV'] ?></td>
-                                <td><?php echo $row['TENBAC'] ?></td>
-                                <td>
-                                    <a class="btn btn-warning" href="./xoa.php?magiaovien=<?php echo $row['MAGV'] ?>">Xóa</a>
-                                    <a class="btn btn-danger" href="./capnhatgiaovien.php?magiaovien=<?php echo $row['MAGV'] ?>">Sửa</a>
-                                </td>
-                            </tr>
-                        <?php
-                        }
-                        ?>
-
-                    </tbody>
-                </table>
-
             </div>
 
 </body>
