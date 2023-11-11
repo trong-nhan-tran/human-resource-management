@@ -106,9 +106,18 @@
 
 
     <?php
-    include("../config/config.php");
-    $sql = "SELECT * FROM `lich_giang_day`";
-    $query_lichgd = mysqli_query($connect, $sql);
+            include("../config/config.php");
+
+            $search = $_GET['search'];
+            $sql = "CALL TimLichDay('$search')";
+
+            // Kết nối chuỗi sql vào CSDL
+            $result = mysqli_query($connect, $sql);
+
+            // Kiểm tra kết quả
+            if (!$result) {
+                die("Query failed: " . mysqli_error($connect));
+        }
     ?>
     <div>
         <h1>Lịch Giảng Dạy</h1>
@@ -125,16 +134,19 @@
             <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal-them-gv">Thêm Lịch Dạy</button>
 
         </div>
+        <h2>Kết quả kiểm kiểm cho "<?php echo $search ?>"</h2>
         <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>STT</th>
                     <th>Mã Lịch Giảng Dạy</th>
                     <th>Ngày Dạy</th>
-                    <th>Mã Giáo Viên</th>
-                    <th>Mã Môn Học</th>
-                    <th>Mã Lớp</th>
-                    <th>Mã Tiết Học</th>
+                    <th>Tên Giáo Viên</th>
+                    <th>Môn Học</th>
+                    <th>Lớp</th>
+                    <th>Tiết Học</th>
+                    <th>Giờ Bắt Đầu</th>
+                    <th>Giờ Kết Thúc</th>
                 </tr>
 
             </thead>
@@ -142,17 +154,19 @@
             <tbody>
                 <?php
                 $i = 0;
-                while ($row = mysqli_fetch_array($query_lichgd)) {
+                while ($row = mysqli_fetch_array($result)) {
                     $i++;
                 ?>
                     <tr class="">
                         <td><?php echo $i ?></td>
                         <td><?php echo $row['MALGD'] ?></td>
                         <td><?php echo $row['NGAYDAY'] ?></td>
-                        <td><?php echo $row['MAGV'] ?></td>
-                        <td><?php echo $row['MAMONHOC'] ?></td>
-                        <td><?php echo $row['MALOP'] ?></td>
-                        <td><?php echo $row['MATIETHOC'] ?></td>
+                        <td><?php echo $row['TENGV'] ?></td>
+                        <td><?php echo $row['TENMONHOC'] ?></td>
+                        <td><?php echo $row['TENLOP'] ?></td>
+                        <td><?php echo $row['TENTIETHOC'] ?></td>
+                        <td><?php echo $row['GIOBATDAU'] ?></td>
+                        <td><?php echo $row['GIOKETTHUC'] ?></td>
                         <td>
                             <a class="btn btn-warning" href="./xoa.php?malgd=<?php echo $row['MALGD'] ?>">Xóa</a>
                             <a class="btn btn-danger" href="./capnhatlichday.php?malgd=<?php echo $row['MALGD'] ?>">Sửa</a>

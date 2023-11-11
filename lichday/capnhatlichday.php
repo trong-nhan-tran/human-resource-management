@@ -45,8 +45,12 @@
                     $sql_mh = "SELECT *FROM mon_hoc";
                     $query_mh = mysqli_query($connect, $sql_mh);
                     while ($row_mh = mysqli_fetch_array($query_mh)) {
+                        $selected = '';
+                        if ($row_lichgd['MAMONHOC'] == $row_mh['MAMONHOC']) {
+                            $selected = 'selected';
+                        }
                     ?>
-                        <option value="<?php echo $row_mh['MAMONHOC'] ?>">
+                        <option value="<?php echo $row_mh['MAMONHOC'] ?>" <?php echo $selected ?>>
                             <?php echo $row_mh['TENMONHOC'] ?>
                         </option>
                     <?php
@@ -62,8 +66,12 @@
                     $sql_lop = "SELECT *FROM lop_hoc";
                     $query_lop = mysqli_query($connect, $sql_lop);
                     while ($row_lop = mysqli_fetch_array($query_lop)) {
+                        $selected = '';
+                        if ($row_lichgd['MALOP'] == $row_lop['MALOP']) {
+                            $selected = 'selected';
+                        }
                     ?>
-                        <option value="<?php echo $row_lop['MALOP'] ?>">
+                        <option value="<?php echo $row_lop['MALOP'] ?>" <?php echo $selected ?>>
                             <?php echo $row_lop['TENLOP'] ?>
                         </option>
                     <?php
@@ -79,9 +87,13 @@
                     $sql_th = "SELECT *FROM tiet_hoc ";
                     $query_th = mysqli_query($connect, $sql_th);
                     while ($row_th = mysqli_fetch_array($query_th)) {
+                        $selected = '';
+                        if ($row_lichgd['MATIETHOC'] == $row_th['MATIETHOC']) {
+                            $selected = 'selected';
+                        }
                     ?>
-                        <option value="<?php echo $row_th['MATIETHOC'] ?>">
-                            <?php echo $row_th['MATIETHOC'] ?>
+                        <option value="<?php echo $row_th['MATIETHOC'] ?>" <?php echo $selected ?>>
+                            <?php echo $row_th['TENTIETHOC'] ?>
                         </option>
                     <?php
                     }

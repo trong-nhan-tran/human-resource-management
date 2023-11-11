@@ -30,8 +30,12 @@
                         $sql_cv = "SELECT *FROM chuc_vu";
                         $query_cv = mysqli_query($connect, $sql_cv);
                         while ($row_bh = mysqli_fetch_array($query_cv)) {
+                            $selected = '';
+                            if ($row_giaovien['MACV'] == $row_bh['MACV']) {
+                                $selected = 'selected';
+                            }
                         ?>
-                            <option value="<?php echo $row_bh['MACV'] ?>">
+                            <option value="<?php echo $row_bh['MACV'] ?>" <?php echo $selected ?>>
                                 <?php echo $row_bh['TENCV'] ?>
                             </option>
                         <?php
@@ -39,6 +43,7 @@
                         ?>
                     </select>
                 </div>
+
                 <div class="form-group">
                     <label>Ngày Sinh:</label>
                     <input class="form-control" type="date" name="NGAYSINHGV" value="<?php echo $row_giaovien['NGAYSINHGV'] ?>" required>
@@ -98,8 +103,12 @@
                         $sql_monhoc = "SELECT *FROM mon_hoc";
                         $query_monhoc = mysqli_query($connect, $sql_monhoc);
                         while ($row_monhoc = mysqli_fetch_array($query_monhoc)) {
+                            $selected = '';
+                            if ($row_giaovien['MAMONHOC'] == $row_monhoc['MAMONHOC']) {
+                                $selected = 'selected';
+                            }
                         ?>
-                            <option value="<?php echo $row_monhoc['MAMONHOC'] ?>">
+                            <option value="<?php echo $row_monhoc['MAMONHOC'] ?>" <?php echo $selected ?>>
                                 <?php echo $row_monhoc['TENMONHOC'] ?>
                             </option>
                         <?php
@@ -115,8 +124,12 @@
                         $sql_tdhv = "SELECT *FROM trinh_do_hoc_van";
                         $query_tdhv = mysqli_query($connect, $sql_tdhv);
                         while ($row_tdhv = mysqli_fetch_array($query_tdhv)) {
+                            $selected = '';
+                            if ($row_giaovien['MATDHV'] == $row_tdhv['MATDHV']) {
+                                $selected = 'selected';
+                            }
                         ?>
-                            <option value="<?php echo $row_tdhv['MATDHV'] ?>">
+                            <option value="<?php echo $row_tdhv['MATDHV'] ?>" <?php echo $selected ?>>
                                 <?php echo $row_tdhv['TRINHDO'] ?>
                             </option>
                         <?php
@@ -132,8 +145,12 @@
                         $sql_hanggv = "SELECT *FROM hang_gv";
                         $query_hanggv = mysqli_query($connect, $sql_hanggv);
                         while ($row_hanggv = mysqli_fetch_array($query_hanggv)) {
+                            $selected = '';
+                            if ($row_giaovien['MAHANGGV'] == $row_hanggv['MAHANGGV']) {
+                                $selected = 'selected';
+                            }
                         ?>
-                            <option value="<?php echo $row_hanggv['MAHANGGV'] ?>">
+                            <option value="<?php echo $row_hanggv['MAHANGGV'] ?>" <?php echo $selected ?>>
                                 <?php echo $row_hanggv['TENHANGGV'] ?>
                             </option>
                         <?php
@@ -142,15 +159,19 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Bậc Lương: </label>
+                    <label>Bậc Giáo Viên: </label>
                     <select class="form-control" name="MABAC" id="">
                         <?php
                         include("../config/config.php");
                         $sql_bacluong = "SELECT *FROM bac_luong";
                         $query_bacluong = mysqli_query($connect, $sql_bacluong);
                         while ($row_bacluong = mysqli_fetch_array($query_bacluong)) {
+                            $selected = '';
+                            if ($row_giaovien['MABAC'] == $row_bacluong['MABAC']) {
+                                $selected = 'selected';
+                            }
                         ?>
-                            <option value="<?php echo $row_bacluong['MABAC'] ?>">
+                            <option value="<?php echo $row_bacluong['MABAC'] ?>" <?php echo $selected ?>>
                                 <?php echo $row_bacluong['TENBAC'] ?>
                             </option>
                         <?php
