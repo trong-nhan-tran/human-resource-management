@@ -41,12 +41,17 @@ if (isset($_POST['dangnhap'])) {
         border-radius: 5px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         padding: 20px;
-        text-align: center;
         width: 450px;
     }
 
     .container h1 {
         color: #007bff;
+        text-align: center;
+    }
+
+    .container .button-register{
+        text-align: center;
+
     }
 
     .form-group label {
@@ -93,7 +98,12 @@ if (isset($_POST['dangnhap'])) {
             <div class="form-group">
                 <input type="submit" class="form-control" name="dangnhap" value="Đăng nhập">
             </div>
+
         </form>
+
+        <div class="button-register">
+            Chưa có tài khoản? <a href="./dangkigiaovien.php"> Đăng Kí</a>
+        </div>
     </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
