@@ -38,7 +38,6 @@
         if (isset($_SESSION['user'])) {
             $user = $_SESSION['user'];
             $magv = $user['MAGV'];
-
             // Kết nối với cơ sở dữ liệu
             include("../config/config.php");
 
