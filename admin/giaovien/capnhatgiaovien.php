@@ -4,7 +4,7 @@
     <?php include("../components/navbar.php")  ?>
 
     <?php
-    include("../config/config.php");
+    include("../../config/config.php");
     $sql_giaovien = "SELECT *FROM `giao_vien` where `giao_vien`.`MAGV`='$_GET[magiaovien]'";
     $query_giaovien = mysqli_query($connect, $sql_giaovien);
     while ($row_giaovien = mysqli_fetch_array($query_giaovien)) {

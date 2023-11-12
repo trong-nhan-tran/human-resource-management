@@ -24,7 +24,7 @@
     </form>
 
     <?php
-    include("../config/config.php");
+    include("../../config/config.php");
     $sql = "SELECT * FROM `chuc_vu` ORDER BY `chuc_vu`.`MACV` ASC";
     $query_chucvu = mysqli_query($connect, $sql);
     ?>

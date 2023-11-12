@@ -10,7 +10,7 @@
 
 <body>
     <?php
-    include("../config/config.php");
+    include("../../config/config.php");
     $sql_lietke_danhmucsp = "SELECT * FROM `chuc_vu`WHERE MACV='$_GET[idchucvu]' LIMIT 1";
     $query_lietke_danhmucsp = mysqli_query($connect, $sql_lietke_danhmucsp);
     ?>

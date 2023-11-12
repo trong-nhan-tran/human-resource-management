@@ -1,20 +1,26 @@
 <?php
 session_start();
-include("../config/config.php");
+include("./config/config.php");
 if (isset($_POST['dangnhap'])) {
     $taikhoan = $_POST['username'];
     $matkhau = $_POST['password'];
-    $sql = "SELECT * FROM `giao_vien` WHERE `TENTK`='" . $taikhoan . "' AND `MATKHAU`='" . $matkhau . "' LIMIT 1";
-    $row = mysqli_query($connect, $sql);
-    $row_data = mysqli_fetch_array($row);
-    if ($row) {
-        $_SESSION['dangnhap'] = $row_data['TENGV'];
-        $_SESSION['TENGV'] = $row_data['TENGV'];
-        $_SESSION['MAGV'] = $row_data['MAGV'];
-        echo "<script> window.location.href='./thongtindangnhap.php';</script>";
+    $sql = "SELECT * FROM `giao_vien` WHERE `TENTK`=? AND `MATKHAU`=? LIMIT 1";
+    $stmt = $connect->prepare($sql);
+    $stmt->bind_param("ss", $taikhoan, $matkhau);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        $row_data = $result->fetch_assoc();
+        $role = $row_data['role'];
+        if($role == 0){
+            header("Location: ./admin/giaovien/lietkegiaovien.php");
+        }
+    } else {
+        $txt_err = "Sai tên tài khoản hoặc mật khẩu";
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -81,6 +87,10 @@ if (isset($_POST['dangnhap'])) {
     .form-group input[type="submit"]:hover {
         background-color: #0056b3;
     }
+
+    .message-err-login{
+        color: red;
+    }
 </style>
 
 <body>
@@ -99,11 +109,14 @@ if (isset($_POST['dangnhap'])) {
                 <input type="submit" class="form-control" name="dangnhap" value="Đăng nhập">
             </div>
 
+            <div class="message-err-login">
+                <?php  
+                    if (isset($txt_err) && ($txt_err != "")){
+                        echo $txt_err;
+                    }
+                ?>
+            </div>
         </form>
-
-        <div class="button-register">
-            Chưa có tài khoản? <a href="./dangkigiaovien.php"> Đăng Kí</a>
-        </div>
     </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

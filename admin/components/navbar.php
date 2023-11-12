@@ -7,6 +7,7 @@
       <li class=""><a href="../giaovien/lietkegiaovien.php">Giáo Viên</a></li>
       <li><a href="../lichday/lietkelichday.php">Lịch Dạy</a></li>
       <li><a href="../luong/lietkeluong.php">Lương</a></li>
+      <li><a href="/qlnhansu/dangxuat.php">Đăng Xuất</a></li>
     </ul>
   </div>
 </nav>

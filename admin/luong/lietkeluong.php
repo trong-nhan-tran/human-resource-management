@@ -3,7 +3,8 @@
 <body>
     <?php include("../components/navbar.php") ?>
     <?php
-    include("../config/config.php");
+        include("../../config/config.php");
+
     ?>
 
     <div>

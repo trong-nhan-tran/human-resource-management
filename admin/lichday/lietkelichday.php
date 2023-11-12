@@ -27,7 +27,7 @@
                             <label>Giáo Viên: </label>
                             <select class="form-control" name="MAGV" id="">
                                 <?php
-                                include("../config/config.php");
+                                    include("../../config/config.php");
                                 $sql_gv = "SELECT *FROM giao_vien";
                                 $query_gv = mysqli_query($connect, $sql_gv);
                                 while ($row_gv = mysqli_fetch_array($query_gv)) {
@@ -44,7 +44,7 @@
                             <label>Môn Học: </label>
                             <select class="form-control" name="MAMONHOC" id="">
                                 <?php
-                                include("../config/config.php");
+                                    include("../../config/config.php");
                                 $sql_mh = "SELECT *FROM mon_hoc";
                                 $query_mh = mysqli_query($connect, $sql_mh);
                                 while ($row_mh = mysqli_fetch_array($query_mh)) {
@@ -61,7 +61,7 @@
                             <label>Lớp: </label>
                             <select class="form-control" name="MALOP" id="">
                                 <?php
-                                include("../config/config.php");
+                                    include("../../config/config.php");
                                 $sql_lop = "SELECT *FROM lop_hoc";
                                 $query_lop = mysqli_query($connect, $sql_lop);
                                 while ($row_lop = mysqli_fetch_array($query_lop)) {
@@ -78,7 +78,7 @@
                             <label>Tiết học: </label>
                             <select class="form-control" name="MATIETHOC" id="">
                                 <?php
-                                include("../config/config.php");
+                                    include("../../config/config.php");
                                 $sql_th = "SELECT *FROM tiet_hoc";
                                 $query_th = mysqli_query($connect, $sql_th);
                                 while ($row_th = mysqli_fetch_array($query_th)) {
@@ -106,7 +106,7 @@
 
 
     <?php
-            include("../config/config.php");
+                include("../../config/config.php");
             $sql = "CALL HienThiLichDay()";
 
             // Kết nối chuỗi sql vào CSDL
