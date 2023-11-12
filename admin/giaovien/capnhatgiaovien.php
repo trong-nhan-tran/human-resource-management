@@ -48,12 +48,12 @@
                     <label>Ngày Sinh:</label>
                     <input class="form-control" type="date" name="NGAYSINHGV" value="<?php echo $row_giaovien['NGAYSINHGV'] ?>" required>
                 </div>
-                <div class="form-group">
+                <div class="check-box">
                     <label>Giới Tính:</label>
-                    <input type="radio" name="GIOITINHGV" value="<?php echo $row_giaovien['GIOITINHGV'] ?>" required checked>0 - Nam
-                    &emsp;
-                    <input type="radio" name="GIOITINHGV" value="<?php echo $row_giaovien['GIOITINHGV'] ?>" required checked>1 - Nữ
+                    <input type="radio" name="GIOITINHGV" value="Nam" <?php echo ($row_giaovien['GIOITINHGV'] == "Nam") ? 'checked' : '' ?>>Nam
+                    <input type="radio" name="GIOITINHGV" value="Nữ" <?php echo ($row_giaovien['GIOITINHGV'] == "Nữ") ? 'checked' : '' ?>>Nữ
                 </div>
+
                 <div class="form-group">
                     <label>Địa chỉ:</label>
                     <input class="form-control" type="text" name="DIACHIGV" value="<?php echo $row_giaovien['DIACHIGV'] ?>" required>
@@ -78,6 +78,12 @@
                     <label>Mật khẩu:</label>
                     <input class="form-control" type="password" name="MATKHAU" value="<?php echo $row_giaovien['MATKHAU'] ?>" required>
                 </div>
+                <div class="check-box">
+                    <label style="margin-right: 16px;">Phân quyền tài khoản:</label>
+                    <input type="radio" name="role" value="1" <?php echo ($row_giaovien['role'] == 1) ? 'checked' : '' ?>>Người dùng
+                    <input type="radio" name="role" value="0" <?php echo ($row_giaovien['role'] == 0) ? 'checked' : '' ?>>Admin
+                </div>
+
                 <div class="form-group">
                     <label>Bảo Hiểm: </label>
                     <select class="form-control" name="MABH" id="">

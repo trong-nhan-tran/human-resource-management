@@ -71,7 +71,7 @@
                                 <td><?php echo $row['TENGV'] ?></td>
                                 <td><?php echo $row['TENCV'] ?></td>
                                 <td><?php echo $row['NGAYSINHGV'] ?></td>
-                                <td><?php echo $row['GIOITINHGV'] == 0 ? 'Nam' : 'Nữ'; ?></td>
+                                <td><?php echo $row['GIOITINHGV']?></td>
                                 <td><?php echo $row['DIACHIGV'] ?></td>
                                 <td><?php echo $row['SDTGV'] ?></td>
                                 <td><?php echo $row['CCCDGV'] ?></td>
@@ -139,9 +139,9 @@
                                 </div>
                                 <div class="check-box">
                                     <label>Giới Tính:</label>
-                                    <input type="radio" name="GIOITINHGV" value="nam" checked>Nam
+                                    <input type="radio" name="GIOITINHGV" value="Nam" checked>Nam
                                     &emsp;
-                                    <input type="radio" name="GIOITINHGV" value="nu" checked>Nữ
+                                    <input type="radio" name="GIOITINHGV" value="Nữ">Nữ
                                 </div>
                                 <div class="form-group">
                                     <label>Địa chỉ:</label>

@@ -1,5 +1,5 @@
 <?php
-include("../config/config.php");
+include("../../config/config.php");
 $id = $_GET['magiaovien'];
 
 $slq_gv_lich_day = "DELETE FROM `lich_giang_day` WHERE `lich_giang_day`.`MAGV`='" . $id . "'";

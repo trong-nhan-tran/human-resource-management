@@ -11,6 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $EMAILGV = $_POST['EMAILGV'];
     $TENTK = $_POST['TENTK'];
     $MATKHAU = $_POST['MATKHAU'];
+    $role = $_POST['role'];
     $MABH = $_POST['MABH'];
     $MAMONHOC = $_POST['MAMONHOC'];
     $MATDHV = $_POST['MATDHV'];
@@ -21,9 +22,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //Biến kết nối/giao tiếp với CSDL
         $pdo = new PDO("mysql:host=localhost;dbname=qlns_truong_hoc", "root", "");
         $stmt = $pdo->prepare("INSERT INTO `giao_vien`(`MAGV`, `TENGV`, `MACV`, `NGAYSINHGV`, `GIOITINHGV`,
-        `DIACHIGV`, `SDTGV`, `CCCDGV`, `EMAILGV`, `TENTK`, `MATKHAU`, `MABH`, `MAMONHOC`,
+        `DIACHIGV`, `SDTGV`, `CCCDGV`, `EMAILGV`, `TENTK`, `MATKHAU`,`role`, `MABH`, `MAMONHOC`,
         `MATDHV`, `MAHANGGV`, `MABAC`) VALUES (:MAGV, :TENGV, :MACV ,:NGAYSINHGV, :GIOITINHGV, :DIACHIGV, :SDTGV,
-        :CCCDGV, :EMAILGV, :TENTK, :MATKHAU, :MABH, :MAMONHOC, :MATDHV, :MAHANGGV, :MABAC)");
+        :CCCDGV, :EMAILGV, :TENTK, :MATKHAU, :role,:MABH, :MAMONHOC, :MATDHV, :MAHANGGV, :MABAC)");
 
         // Bind parameters
         $stmt->bindParam(':MAGV', $MAGV);
@@ -37,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':EMAILGV', $EMAILGV);
         $stmt->bindParam(':TENTK', $TENTK);
         $stmt->bindParam(':MATKHAU', $MATKHAU);
+        $stmt->bindParam(':role', $role);
         $stmt->bindParam(':MABH', $MABH);
         $stmt->bindParam(':MAMONHOC', $MAMONHOC);
         $stmt->bindParam(':MATDHV', $MATDHV);
@@ -51,5 +53,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } finally {
         $pdo = null;
     }
-    header("location: ./lietkegiaovien.php");
+   // header("location: ./lietkegiaovien.php");
 }
